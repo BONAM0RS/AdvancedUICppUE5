@@ -18,4 +18,5 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetDefaultClickAndBackActionsState(bool bNewState);
 	
+	// Add functions to disable/enable thumbstick/dpad/key/tab navigation, maybe smth else 
 };

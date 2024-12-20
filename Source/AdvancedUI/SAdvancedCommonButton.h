@@ -12,6 +12,7 @@
 class ADVANCEDUI_API SAdvancedCommonButton : public SCommonButton
 {
 public:
+	// Override to unlock enter button as accept input
 	virtual FReply OnKeyDown(const FGeometry& MyGeometry, const FKeyEvent& InKeyEvent) override;
 	virtual FReply OnKeyUp(const FGeometry& MyGeometry, const FKeyEvent& InKeyEvent) override;
 };
