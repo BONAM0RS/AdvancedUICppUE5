@@ -16,7 +16,14 @@ class ADVANCEDUI_API APlayerControllerBase : public APlayerController
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void SetDefaultClickAndBackActionsState(bool bNewState);
-	
-	// Add functions to disable/enable thumbstick/dpad/key/tab navigation, maybe smth else 
+	void SetTabNavigationState(bool bNewState);
+
+	UFUNCTION(BlueprintCallable)
+	void SetKeyNavigationState(bool bNewState);
+
+	UFUNCTION(BlueprintCallable)
+	void SetAnalogNavigationState(bool bNewState);
+
+	UFUNCTION(BlueprintCallable)
+	void SetDpadNavigationState(bool bNewState);
 };

@@ -11,12 +11,16 @@ public:
     FAdvancedCommonAnalogCursor(const UCommonUIActionRouterBase& InActionRouter)
         : FCommonAnalogCursor(InActionRouter)
     {
+        //bIsAnalogMovementEnabled = true;
     }
 
     virtual bool HandleKeyDownEvent(FSlateApplication& SlateApp, const FKeyEvent& InKeyEvent) override;
     virtual bool HandleKeyUpEvent(FSlateApplication& SlateApp, const FKeyEvent& InKeyEvent) override;
 
     // You can return false to not process virtual accept as mouse click (then you need also handle navigation action accept 
-    // in CommonButtonBase / SButton -> override key down/up events), but I think it's a rare case
-    virtual bool ShouldVirtualAcceptSimulateMouseButton(const FKeyEvent& InKeyEvent, EInputEvent InputEvent) const override { return true; }
+    // in CommonButtonBase / SButton -> override key down/up events)
+    // 
+    // Current override setup: Only when the Active Input Mode is not Game Mode, it should  simulate the Mouse Left Click
+    virtual bool ShouldVirtualAcceptSimulateMouseButton(const FKeyEvent& InKeyEvent, EInputEvent InputEvent) const override;
+
 };

@@ -3,6 +3,8 @@
 
 #include "AdvancedCommonAnalogCursor.h"
 
+#include "AdvancedCommonUIActionRouter.h"
+
 
 bool FAdvancedCommonAnalogCursor::HandleKeyDownEvent(FSlateApplication& SlateApp, const FKeyEvent& InKeyEvent)
 {
@@ -13,4 +15,17 @@ bool FAdvancedCommonAnalogCursor::HandleKeyUpEvent(FSlateApplication& SlateApp, 
 {
 	return FCommonAnalogCursor::HandleKeyUpEvent(SlateApp, InKeyEvent);
 }
+
+bool FAdvancedCommonAnalogCursor::ShouldVirtualAcceptSimulateMouseButton(const FKeyEvent& InKeyEvent, EInputEvent InputEvent) const
+{
+	const bool bIsGameMode = ActionRouter.GetActiveInputMode() == ECommonInputMode::Game;
+	if (bIsGameMode)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+
 
