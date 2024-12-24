@@ -18,6 +18,5 @@ void UAdvancedCommonUIActionRouter::SetGamepadCursorMovementState(bool bNewState
     {
         TSharedPtr<FAdvancedCommonAnalogCursor> AdvancedCommonAnalogCursor = StaticCastSharedPtr<FAdvancedCommonAnalogCursor>(CommonAnalogCursor);
         AdvancedCommonAnalogCursor->SetGamepadCursorMovementState(bNewState);
-        //AdvancedCommonAnalogCursor->UpdateCursorVisibility();
     }
 }

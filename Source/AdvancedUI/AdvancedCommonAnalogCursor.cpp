@@ -4,11 +4,37 @@
 #include "AdvancedCommonAnalogCursor.h"
 
 #include "AdvancedCommonUIActionRouter.h"
+#include "CommonInputTypeEnum.h"
 
 
-void FAdvancedCommonAnalogCursor::UpdateCursorVisibility()
+void FAdvancedCommonAnalogCursor::RefreshCursorVisibility()
 {
-	RefreshCursorVisibility();
+	FCommonAnalogCursor::RefreshCursorVisibility();
+
+	FSlateApplication& SlateApp = FSlateApplication::Get();
+	if (TSharedPtr<FSlateUser> SlateUser = SlateApp.GetUser(GetOwnerUserIndex()))
+	{
+		const bool bShowCursor = bIsAnalogMovementEnabled || ActionRouter.ShouldAlwaysShowCursor() || ActiveInputMethod == ECommonInputType::MouseAndKeyboard;
+
+		if (bShowCursor)
+		{
+			if (ActiveInputMethod == ECommonInputType::MouseAndKeyboard)
+			{
+				SlateApp.SetPlatformCursorVisibility(true);
+				SlateUser->SetCursorVisibility(true);
+			}
+			else if (ActiveInputMethod == ECommonInputType::Gamepad)
+			{
+				SlateApp.SetPlatformCursorVisibility(false);
+				SlateUser->SetCursorVisibility(true);
+			}
+		}
+		else
+		{
+			SlateApp.SetPlatformCursorVisibility(false);
+			SlateUser->SetCursorVisibility(false);
+		}
+	}
 }
 
 void FAdvancedCommonAnalogCursor::SetGamepadCursorMovementState(bool bNewState)

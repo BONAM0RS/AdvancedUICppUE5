@@ -14,7 +14,7 @@ public:
         //bIsAnalogMovementEnabled = true;
     }
 
-    void UpdateCursorVisibility();
+    virtual void RefreshCursorVisibility() override;
 
     void SetGamepadCursorMovementState(bool bNewState);
 
