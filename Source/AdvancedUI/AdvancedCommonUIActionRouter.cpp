@@ -10,3 +10,14 @@ TSharedRef<FCommonAnalogCursor> UAdvancedCommonUIActionRouter::MakeAnalogCursor(
 {
 	return FCommonAnalogCursor::CreateAnalogCursor<FAdvancedCommonAnalogCursor>(*this);
 }
+
+void UAdvancedCommonUIActionRouter::SetGamepadCursorMovementState(bool bNewState)
+{
+    TSharedPtr<FCommonAnalogCursor> CommonAnalogCursor = GetCommonAnalogCursor();
+    if (CommonAnalogCursor.IsValid())
+    {
+        TSharedPtr<FAdvancedCommonAnalogCursor> AdvancedCommonAnalogCursor = StaticCastSharedPtr<FAdvancedCommonAnalogCursor>(CommonAnalogCursor);
+        AdvancedCommonAnalogCursor->SetGamepadCursorMovementState(bNewState);
+        //AdvancedCommonAnalogCursor->UpdateCursorVisibility();
+    }
+}

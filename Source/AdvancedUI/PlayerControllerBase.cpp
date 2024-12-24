@@ -3,7 +3,15 @@
 #include "PlayerControllerBase.h"
 
 #include "Framework/Application/NavigationConfig.h"
+#include "AdvancedCommonAnalogCursor.h"
 
+
+void APlayerControllerBase::BeginPlay()
+{
+	Super::BeginPlay();
+
+	//FAdvancedCommonAnalogCursor* AnalogCursor = FAdvancedCommonAnalogCursor::FindAnalogCursor(this);
+}
 
 void APlayerControllerBase::SetTabNavigationState(bool bNewState)
 {

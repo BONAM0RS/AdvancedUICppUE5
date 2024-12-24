@@ -15,6 +15,8 @@ class ADVANCEDUI_API APlayerControllerBase : public APlayerController
 	GENERATED_BODY()
 
 public:
+	virtual void BeginPlay() override;
+
 	UFUNCTION(BlueprintCallable)
 	void SetTabNavigationState(bool bNewState);
 

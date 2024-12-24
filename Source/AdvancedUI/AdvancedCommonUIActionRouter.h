@@ -5,6 +5,7 @@
 #include "Input/CommonUIActionRouterBase.h"
 #include "AdvancedCommonUIActionRouter.generated.h"
 
+
 UCLASS()
 class ADVANCEDUI_API UAdvancedCommonUIActionRouter : public UCommonUIActionRouterBase
 {
@@ -14,4 +15,6 @@ public:
 	// Override to create own cursor class (it is auto used if UCommonUIActionRouterBase have child class)
 	virtual TSharedRef<FCommonAnalogCursor> MakeAnalogCursor() const override;
 
+	UFUNCTION(BlueprintCallable)
+	void SetGamepadCursorMovementState(bool bNewState);
 };

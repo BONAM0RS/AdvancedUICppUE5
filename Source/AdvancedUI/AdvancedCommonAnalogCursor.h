@@ -14,6 +14,12 @@ public:
         //bIsAnalogMovementEnabled = true;
     }
 
+    void UpdateCursorVisibility();
+
+    void SetGamepadCursorMovementState(bool bNewState);
+
+    virtual void Tick(const float DeltaTime, FSlateApplication& SlateApp, TSharedRef<ICursor> Cursor) override;
+
     virtual bool HandleKeyDownEvent(FSlateApplication& SlateApp, const FKeyEvent& InKeyEvent) override;
     virtual bool HandleKeyUpEvent(FSlateApplication& SlateApp, const FKeyEvent& InKeyEvent) override;
 

@@ -6,6 +6,21 @@
 #include "AdvancedCommonUIActionRouter.h"
 
 
+void FAdvancedCommonAnalogCursor::UpdateCursorVisibility()
+{
+	RefreshCursorVisibility();
+}
+
+void FAdvancedCommonAnalogCursor::SetGamepadCursorMovementState(bool bNewState)
+{
+	bIsAnalogMovementEnabled = bNewState;
+}
+
+void FAdvancedCommonAnalogCursor::Tick(const float DeltaTime, FSlateApplication& SlateApp, TSharedRef<ICursor> Cursor)
+{
+	FCommonAnalogCursor::Tick(DeltaTime, SlateApp, Cursor);
+}
+
 bool FAdvancedCommonAnalogCursor::HandleKeyDownEvent(FSlateApplication& SlateApp, const FKeyEvent& InKeyEvent)
 {
 	return FCommonAnalogCursor::HandleKeyDownEvent(SlateApp, InKeyEvent);
