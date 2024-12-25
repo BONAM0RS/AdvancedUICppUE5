@@ -6,8 +6,10 @@
 #include "Blueprint/WidgetTree.h"
 #include "AdvancedCommonButtonInternalBase.h"
 
-
 UCommonButtonInternalBase* UAdvancedCommonButtonBase::ConstructInternalButton()
 {
-	return WidgetTree->ConstructWidget<UAdvancedCommonButtonInternalBase>(UAdvancedCommonButtonInternalBase::StaticClass(), FName(TEXT("InternalRootButtonBase")));
+	AdvancedInternalButton = WidgetTree->ConstructWidget<UAdvancedCommonButtonInternalBase>(UAdvancedCommonButtonInternalBase::StaticClass(), FName(TEXT("InternalRootButtonBase")));
+	return AdvancedInternalButton;
 }
+
+

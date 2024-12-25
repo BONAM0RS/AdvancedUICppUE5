@@ -9,31 +9,36 @@
 
 void FAdvancedCommonAnalogCursor::RefreshCursorVisibility()
 {
-	FCommonAnalogCursor::RefreshCursorVisibility();
-
-	FSlateApplication& SlateApp = FSlateApplication::Get();
-	if (TSharedPtr<FSlateUser> SlateUser = SlateApp.GetUser(GetOwnerUserIndex()))
+	if (bIsAnalogMovementEnabled)
 	{
-		const bool bShowCursor = bIsAnalogMovementEnabled || ActionRouter.ShouldAlwaysShowCursor() || ActiveInputMethod == ECommonInputType::MouseAndKeyboard;
-
-		if (bShowCursor)
+		FSlateApplication& SlateApp = FSlateApplication::Get();
+		if (TSharedPtr<FSlateUser> SlateUser = SlateApp.GetUser(GetOwnerUserIndex()))
 		{
-			if (ActiveInputMethod == ECommonInputType::MouseAndKeyboard)
+			const bool bShowCursor = bIsAnalogMovementEnabled || ActionRouter.ShouldAlwaysShowCursor() || ActiveInputMethod == ECommonInputType::MouseAndKeyboard;
+
+			if (bShowCursor)
 			{
-				SlateApp.SetPlatformCursorVisibility(true);
-				SlateUser->SetCursorVisibility(true);
+				if (ActiveInputMethod == ECommonInputType::MouseAndKeyboard)
+				{
+					SlateApp.SetPlatformCursorVisibility(true);
+					SlateUser->SetCursorVisibility(true);
+				}
+				else if (ActiveInputMethod == ECommonInputType::Gamepad)
+				{
+					SlateApp.SetPlatformCursorVisibility(false);
+					SlateUser->SetCursorVisibility(true);
+				}
 			}
-			else if (ActiveInputMethod == ECommonInputType::Gamepad)
+			else
 			{
 				SlateApp.SetPlatformCursorVisibility(false);
-				SlateUser->SetCursorVisibility(true);
+				SlateUser->SetCursorVisibility(false);
 			}
 		}
-		else
-		{
-			SlateApp.SetPlatformCursorVisibility(false);
-			SlateUser->SetCursorVisibility(false);
-		}
+	}
+	else
+	{
+		FCommonAnalogCursor::RefreshCursorVisibility();
 	}
 }
 

@@ -9,7 +9,7 @@
 
 TSharedRef<SWidget> UAdvancedCommonButtonInternalBase::RebuildWidget()
 {
-	MyButton = MyCommonButton = SNew(SAdvancedCommonButton)
+	MyButton = MyCommonButton = AdvancedCommonButton = SNew(SAdvancedCommonButton)
 		.OnClicked(BIND_UOBJECT_DELEGATE(FOnClicked, SlateHandleClickedOverride))
 		.OnDoubleClicked(BIND_UOBJECT_DELEGATE(FOnClicked, SlateHandleDoubleClicked))
 		.OnPressed(BIND_UOBJECT_DELEGATE(FSimpleDelegate, SlateHandlePressedOverride))
@@ -29,13 +29,19 @@ TSharedRef<SWidget> UAdvancedCommonButtonInternalBase::RebuildWidget()
 		.HAlign(HAlign_Fill)
 		.VAlign(VAlign_Fill)
 		[
-			MyCommonButton.ToSharedRef()
+			AdvancedCommonButton.ToSharedRef()
 		];
 
 	if (GetChildrenCount() > 0)
 	{
-		Cast<UButtonSlot>(GetContentSlot())->BuildSlot(MyCommonButton.ToSharedRef());
+		Cast<UButtonSlot>(GetContentSlot())->BuildSlot(AdvancedCommonButton.ToSharedRef());
 	}
 
 	return MyBox.ToSharedRef();
+}
+
+void UAdvancedCommonButtonInternalBase::ReleaseSlateResources(bool bReleaseChildren)
+{
+	Super::ReleaseSlateResources(bReleaseChildren);
+	AdvancedCommonButton.Reset();
 }

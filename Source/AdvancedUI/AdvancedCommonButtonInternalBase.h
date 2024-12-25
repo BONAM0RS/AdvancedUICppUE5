@@ -14,6 +14,12 @@ class ADVANCEDUI_API UAdvancedCommonButtonInternalBase : public UCommonButtonInt
 {
 	GENERATED_BODY()
 
-protected:
+public:
 	virtual TSharedRef<SWidget> RebuildWidget() override;
+
+protected:
+	virtual void ReleaseSlateResources(bool bReleaseChildren) override;
+
+protected:
+	TSharedPtr<class SAdvancedCommonButton> AdvancedCommonButton;
 };

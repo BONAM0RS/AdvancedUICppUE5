@@ -1,18 +1,40 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "PlayerControllerBase.h"
+
+#include "AdvancedGameInstance.h"
 
 #include "FAdvancedNavigationConfig.h"
-#include "AdvancedCommonAnalogCursor.h"
 
 
-void APlayerControllerBase::BeginPlay()
+void UAdvancedGameInstance::Init()
 {
-	Super::BeginPlay();
+	Super::Init();
 
+	ResetAdvancedNavigationConfig();
 }
 
-void APlayerControllerBase::SetTabNavigationState(bool bNewState)
+void UAdvancedGameInstance::Shutdown()
+{
+#if WITH_EDITOR
+	// Reset custom Slate input binding to default
+    // Only done in editor for safety - runtime standalone process won't need this
+	ResetDefaultNavigationConfig();
+#endif
+
+	Super::Shutdown();
+}
+
+void UAdvancedGameInstance::ResetAdvancedNavigationConfig()
+{
+	FSlateApplication::Get().SetNavigationConfig(MakeShared<FAdvancedNavigationConfig>());
+}
+
+void UAdvancedGameInstance::ResetDefaultNavigationConfig()
+{
+	FSlateApplication::Get().SetNavigationConfig(MakeShared<FNavigationConfig>());
+}
+
+void UAdvancedGameInstance::SetTabNavigationState(bool bNewState)
 {
 	if (FSlateApplication::IsInitialized())
 	{
@@ -22,7 +44,7 @@ void APlayerControllerBase::SetTabNavigationState(bool bNewState)
 	}
 }
 
-void APlayerControllerBase::SetKeyNavigationState(bool bNewState)
+void UAdvancedGameInstance::SetKeyNavigationState(bool bNewState)
 {
 	if (FSlateApplication::IsInitialized())
 	{
@@ -32,7 +54,7 @@ void APlayerControllerBase::SetKeyNavigationState(bool bNewState)
 	}
 }
 
-void APlayerControllerBase::SetAnalogNavigationState(bool bNewState)
+void UAdvancedGameInstance::SetAnalogNavigationState(bool bNewState)
 {
 	if (FSlateApplication::IsInitialized())
 	{
@@ -42,7 +64,7 @@ void APlayerControllerBase::SetAnalogNavigationState(bool bNewState)
 	}
 }
 
-void APlayerControllerBase::SetDpadNavigationState(bool bNewState)
+void UAdvancedGameInstance::SetDpadNavigationState(bool bNewState)
 {
 	if (FSlateApplication::IsInitialized())
 	{
@@ -66,7 +88,7 @@ void APlayerControllerBase::SetDpadNavigationState(bool bNewState)
 	}
 }
 
-void APlayerControllerBase::SetArrowsNavigationState(bool bNewState)
+void UAdvancedGameInstance::SetArrowsNavigationState(bool bNewState)
 {
 	if (FSlateApplication::IsInitialized())
 	{
@@ -90,7 +112,7 @@ void APlayerControllerBase::SetArrowsNavigationState(bool bNewState)
 	}
 }
 
-void APlayerControllerBase::SetAcceptNavigationActionsState(bool bEnterNewState, bool bSpacebarNewState)
+void UAdvancedGameInstance::SetAcceptNavigationActionsState(bool bEnterNewState, bool bSpacebarNewState)
 {
 	if (FSlateApplication::IsInitialized())
 	{
@@ -117,7 +139,7 @@ void APlayerControllerBase::SetAcceptNavigationActionsState(bool bEnterNewState,
 	}
 }
 
-void APlayerControllerBase::SetBackNavigationActionsState(bool bNewState)
+void UAdvancedGameInstance::SetBackNavigationActionsState(bool bNewState)
 {
 	if (FSlateApplication::IsInitialized())
 	{
@@ -135,7 +157,7 @@ void APlayerControllerBase::SetBackNavigationActionsState(bool bNewState)
 	}
 }
 
-void APlayerControllerBase::SetAnalogNavigationSide(bool bIsRight)
+void UAdvancedGameInstance::SetAnalogNavigationSide(bool bIsRight)
 {
 	if (FSlateApplication::IsInitialized())
 	{
@@ -155,7 +177,7 @@ void APlayerControllerBase::SetAnalogNavigationSide(bool bIsRight)
 	}
 }
 
-void APlayerControllerBase::SetAnalogNavigationBothState(bool bNewState)
+void UAdvancedGameInstance::SetAnalogNavigationBothState(bool bNewState)
 {
 	if (FSlateApplication::IsInitialized())
 	{

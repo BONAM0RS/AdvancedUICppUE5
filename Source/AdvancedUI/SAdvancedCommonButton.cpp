@@ -12,3 +12,5 @@ FReply SAdvancedCommonButton::OnKeyUp(const FGeometry& MyGeometry, const FKeyEve
 {
 	return SButton::OnKeyUp(MyGeometry, InKeyEvent);
 }
+
+

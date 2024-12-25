@@ -6,6 +6,8 @@
 #include "CommonButtonBase.h"
 #include "AdvancedCommonButtonBase.generated.h"
 
+class UAdvancedCommonButtonInternalBase;
+
 /**
  * 
  */
@@ -16,4 +18,8 @@ class ADVANCEDUI_API UAdvancedCommonButtonBase : public UCommonButtonBase
 
 protected:
 	virtual UCommonButtonInternalBase* ConstructInternalButton() override;
+
+private:
+	UPROPERTY()
+	UAdvancedCommonButtonInternalBase* AdvancedInternalButton = nullptr;
 };

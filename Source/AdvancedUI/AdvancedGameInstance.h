@@ -3,19 +3,27 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/PlayerController.h"
-#include "PlayerControllerBase.generated.h"
+#include "Engine/GameInstance.h"
+#include "AdvancedGameInstance.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ADVANCEDUI_API APlayerControllerBase : public APlayerController
+class ADVANCEDUI_API UAdvancedGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
+	
+public:
+	virtual void Init() override;
+	virtual void Shutdown() override;
 
 public:
-	virtual void BeginPlay() override;
+	UFUNCTION(BlueprintCallable)
+	void ResetAdvancedNavigationConfig();
+
+	UFUNCTION(BlueprintCallable)
+	void ResetDefaultNavigationConfig();
 
 	UFUNCTION(BlueprintCallable)
 	void SetTabNavigationState(bool bNewState);
