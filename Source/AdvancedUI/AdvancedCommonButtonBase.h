@@ -19,6 +19,10 @@ class ADVANCEDUI_API UAdvancedCommonButtonBase : public UCommonButtonBase
 protected:
 	virtual UCommonButtonInternalBase* ConstructInternalButton() override;
 
+public:
+	UFUNCTION(BlueprintCallable)
+	void SetMouseInteractionState(bool bNewState);
+
 private:
 	UPROPERTY()
 	UAdvancedCommonButtonInternalBase* AdvancedInternalButton = nullptr;

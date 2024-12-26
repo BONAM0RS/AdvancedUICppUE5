@@ -7,11 +7,14 @@
 #include "AdvancedCommonButtonInternalBase.h"
 
 
+
 UCommonButtonInternalBase* UAdvancedCommonButtonBase::ConstructInternalButton()
 {
 	AdvancedInternalButton = WidgetTree->ConstructWidget<UAdvancedCommonButtonInternalBase>(UAdvancedCommonButtonInternalBase::StaticClass(), FName(TEXT("InternalRootButtonBase")));
 	return AdvancedInternalButton;
 }
+
+
 
 
 
