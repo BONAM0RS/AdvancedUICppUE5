@@ -9,7 +9,7 @@
 
 
 
-DECLARE_DYNAMIC_DELEGATE_OneParam(FInputActionExecutedDelegate, FText, ActionName);
+DECLARE_DYNAMIC_DELEGATE(FInputActionExecutedDelegate);
 
 /**
  * 
@@ -23,7 +23,8 @@ protected:
 	virtual void NativeDestruct() override;
 
 	UFUNCTION(BlueprintCallable, Category = ExtendedActivatableWidget)
-	void RegisterBinding(const UInputAction* EnhancedInputAction, bool bShowInActionBar, const FInputActionExecutedDelegate& Callback, FUIActionBindingHandle& BindingHandle);
+	void RegisterBinding(const UInputAction* EnhancedInputAction, bool bShowInActionBar,
+		const FInputActionExecutedDelegate Callback, FUIActionBindingHandle& BindingHandle);
 
 	UFUNCTION(BlueprintCallable, Category = ExtendedActivatableWidget)
 	void UnregisterBinding(FUIActionBindingHandle BindingHandle);

@@ -21,13 +21,15 @@ void UAdvancedCommonActivatableWidget::NativeDestruct()
 	Super::NativeDestruct();
 }
 
-void UAdvancedCommonActivatableWidget::RegisterBinding(const UInputAction* EnhancedInputAction, bool bShowInActionBar, const FInputActionExecutedDelegate& Callback, FUIActionBindingHandle& BindingHandle)
+void UAdvancedCommonActivatableWidget::RegisterBinding(const UInputAction* EnhancedInputAction, bool bShowInActionBar,
+	const FInputActionExecutedDelegate Callback, FUIActionBindingHandle& BindingHandle)
 {
 	FBindUIActionArgs BindArgs(EnhancedInputAction, FSimpleDelegate::CreateLambda([EnhancedInputAction, Callback]()
 		{
-			Callback.ExecuteIfBound(EnhancedInputAction->ActionDescription);
+			Callback.ExecuteIfBound();
 		}));
 	BindArgs.bDisplayInActionBar = bShowInActionBar;
+
 	BindingHandle = RegisterUIActionBinding(BindArgs);
 	BindingHandles.Add(BindingHandle);
 }
