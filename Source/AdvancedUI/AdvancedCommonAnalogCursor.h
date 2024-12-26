@@ -11,7 +11,6 @@ public:
     FAdvancedCommonAnalogCursor(const UCommonUIActionRouterBase& InActionRouter)
         : FCommonAnalogCursor(InActionRouter)
     {
-        //bIsAnalogMovementEnabled = true;
     }
 
     virtual void RefreshCursorVisibility() override;
