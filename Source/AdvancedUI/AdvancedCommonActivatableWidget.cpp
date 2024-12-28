@@ -3,26 +3,25 @@
 
 #include "AdvancedCommonActivatableWidget.h"
 
-//#include "CommonUI/Private/Input/UIActionRouterTypes.h"
 #include "Input/CommonUIInputTypes.h"
 
 
+void UAdvancedCommonActivatableWidget::NativeOnDeactivated()
+{
+	UnregisterAllBindings();
+
+	Super::NativeOnDeactivated();
+}
+
 void UAdvancedCommonActivatableWidget::NativeDestruct()
 {
-	for (FUIActionBindingHandle Handle : BindingHandles)
-	{
-		if (Handle.IsValid())
-		{
-			Handle.Unregister();
-		}
-	}
-	BindingHandles.Empty();
+	UnregisterAllBindings();
 
 	Super::NativeDestruct();
 }
 
 void UAdvancedCommonActivatableWidget::RegisterBinding(const UInputAction* EnhancedInputAction, bool bShowInActionBar,
-	const FInputActionExecutedDelegate Callback, FUIActionBindingHandle& BindingHandle)
+	const FInputActionExecutedDelegate& Callback, FUIActionBindingHandle& BindingHandle)
 {
 	FBindUIActionArgs BindArgs(EnhancedInputAction, FSimpleDelegate::CreateLambda([EnhancedInputAction, Callback]()
 		{

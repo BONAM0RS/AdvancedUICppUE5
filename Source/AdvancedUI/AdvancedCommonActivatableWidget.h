@@ -7,8 +7,6 @@
 #include "AdvancedCommonActivatableWidget.generated.h"
 
 
-
-
 DECLARE_DYNAMIC_DELEGATE(FInputActionExecutedDelegate);
 
 /**
@@ -20,16 +18,17 @@ class ADVANCEDUI_API UAdvancedCommonActivatableWidget : public UCommonActivatabl
 	GENERATED_BODY()
 	
 protected:
+	virtual void NativeOnDeactivated() override;
 	virtual void NativeDestruct() override;
 
-	UFUNCTION(BlueprintCallable, Category = ExtendedActivatableWidget)
+	UFUNCTION(BlueprintCallable, Category = AdvancedCommonActivatableWidget)
 	void RegisterBinding(const UInputAction* EnhancedInputAction, bool bShowInActionBar,
-		const FInputActionExecutedDelegate Callback, FUIActionBindingHandle& BindingHandle);
+		const FInputActionExecutedDelegate& Callback, FUIActionBindingHandle& BindingHandle);
 
-	UFUNCTION(BlueprintCallable, Category = ExtendedActivatableWidget)
+	UFUNCTION(BlueprintCallable, Category = AdvancedCommonActivatableWidget)
 	void UnregisterBinding(FUIActionBindingHandle BindingHandle);
 
-	UFUNCTION(BlueprintCallable, Category = ExtendedActivatableWidget)
+	UFUNCTION(BlueprintCallable, Category = AdvancedCommonActivatableWidget)
 	void UnregisterAllBindings();
 
 private:
