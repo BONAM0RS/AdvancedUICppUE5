@@ -13,6 +13,11 @@ FSlateBrush UAdvancedCommonActionWidget::GetIcon() const
 {
     //return Super::GetIcon();
 
+	if (bUseCustomIcon)
+	{
+		return GetCustomIcon();
+	}
+
 	if (!IsDesignTime())
 	{
 		if (const UCommonInputSubsystem* CommonInputSubsystem = GetInputSubsystem())
@@ -59,7 +64,17 @@ FSlateBrush UAdvancedCommonActionWidget::GetIcon() const
 	return *FStyleDefaults::GetNoBrush();
 }
 
-FSlateBrush UAdvancedCommonActionWidget::GetIconForEnhancedInputAction(const UCommonInputSubsystem* CommonInputSubsystem, 
+void UAdvancedCommonActionWidget::UpdateActionWidget()
+{
+	Super::UpdateActionWidget();
+
+	if (MyIcon.IsValid())
+	{
+		MyIcon->SetDesiredSizeOverride(FVector2D(Size, Size));
+	}
+}
+
+FSlateBrush UAdvancedCommonActionWidget::GetIconForEnhancedInputAction(const UCommonInputSubsystem* CommonInputSubsystem,
 	const UInputAction* InputAction, const int KeyNumber) const
 {
 	FKey KeyForCurrentInput = GetKeyForInputType(CommonInputSubsystem->GetLocalPlayer(), CommonInputSubsystem->GetCurrentInputType(), InputAction, KeyNumber);
@@ -117,5 +132,38 @@ FKey UAdvancedCommonActionWidget::GetKeyForInputType(const ULocalPlayer* LocalPl
 
 	return FKey();
 }
+
+UCommonInputSubsystem* UAdvancedCommonActionWidget::GetCommonInputSubsystem() const
+{
+	return GetInputSubsystem();
+}
+
+bool UAdvancedCommonActionWidget::ShouldUpdateActionWidgetIcon() const
+{
+	//return Super::ShouldUpdateActionWidgetIcon();
+
+	if (bAlwaysHideOverride)
+	{
+		return false;
+	}
+
+	if (bUseCustomIcon)
+	{
+		return true;
+	}
+
+	return Super::ShouldUpdateActionWidgetIcon();
+}
+
+bool UAdvancedCommonActionWidget::IsPreview() const
+{
+	return IsDesignTime();
+}
+
+FSlateBrush UAdvancedCommonActionWidget::GetCustomIcon_Implementation() const
+{
+	return *FStyleDefaults::GetNoBrush();
+}
+
 
 
