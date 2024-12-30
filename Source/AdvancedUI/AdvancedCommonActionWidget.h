@@ -15,11 +15,12 @@ class ADVANCEDUI_API UAdvancedCommonActionWidget : public UCommonActionWidget
 	GENERATED_BODY()
 	
 public:
+	UFUNCTION(BlueprintCallable)
+	virtual void UpdateActionWidget() override;
+
 	virtual FSlateBrush GetIcon() const override;
 
 protected:
-	virtual void UpdateActionWidget() override;
-
 	FSlateBrush GetIconForEnhancedInputAction(const UCommonInputSubsystem* CommonInputSubsystem, const UInputAction* InputAction, const int KeyNumber) const;
 	FKey GetKeyForInputType(const ULocalPlayer* LocalPlayer, ECommonInputType InputType, const UInputAction* InputAction, const int KeyNumber) const;
 
