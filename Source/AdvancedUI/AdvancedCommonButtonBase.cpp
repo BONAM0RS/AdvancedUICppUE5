@@ -5,8 +5,38 @@
 
 #include "Blueprint/WidgetTree.h"
 #include "AdvancedCommonButtonInternalBase.h"
+#include "Components/Overlay.h"
+#include "Components/OverlaySlot.h"
+#include "Components/GridPanel.h"
+#include "Components/GridSlot.h"
 
 
+bool UAdvancedCommonButtonBase::Initialize()
+{
+	const bool bInitializedThisCall = Super::Initialize();
+
+	if (bInitializedThisCall)
+	{
+		if (ParentGridPanel)
+		{
+			UOverlay* NewRootWidget = NewObject<UOverlay>(this);
+			UOverlaySlot* OverlaySlot = Cast<UOverlaySlot>(NewRootWidget->AddChild(ParentGridPanel));
+			OverlaySlot->SetPadding(FMargin());
+			OverlaySlot->SetHorizontalAlignment(EHorizontalAlignment::HAlign_Fill);
+			OverlaySlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Fill);
+
+
+			UGridSlot* GridSlot = ParentGridPanel->AddChildToGrid(WidgetTree->RootWidget, 1, 1);
+			GridSlot->SetPadding(FMargin());
+			GridSlot->SetHorizontalAlignment(EHorizontalAlignment::HAlign_Fill);
+			GridSlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Fill);
+
+			WidgetTree->RootWidget = NewRootWidget;
+		}
+	}
+
+	return bInitializedThisCall;
+}
 
 void UAdvancedCommonButtonBase::SetInputActionWidget(UCommonActionWidget* ActionWidget)
 {

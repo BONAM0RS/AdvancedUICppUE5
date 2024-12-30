@@ -7,6 +7,7 @@
 #include "AdvancedCommonButtonBase.generated.h"
 
 class UAdvancedCommonButtonInternalBase;
+class UGridPanel;
 
 /**
  * 
@@ -17,6 +18,8 @@ class ADVANCEDUI_API UAdvancedCommonButtonBase : public UCommonButtonBase
 	GENERATED_BODY()
 
 public:
+	virtual bool Initialize() override;
+
 	UFUNCTION(BlueprintCallable)
 	void SetInputActionWidget(UCommonActionWidget* ActionWidget);
 
@@ -36,4 +39,9 @@ protected:
 
 	UPROPERTY(BlueprintAssignable, Category = "Events", meta = (AllowPrivateAccess = true, DisplayName = "On Unfocused"))
 	FCommonButtonBaseClicked OnButtonBaseUnfocused;
+
+protected:
+	// You can use it to add content that will not be recognized as button (example: input action widget outside of button borders)
+	UPROPERTY(BlueprintReadOnly, Category = Input, meta = (BindWidget, OptionalWidget = true, AllowPrivateAccess = true))
+	UGridPanel* ParentGridPanel;
 };
