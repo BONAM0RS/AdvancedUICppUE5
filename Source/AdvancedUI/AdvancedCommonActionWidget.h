@@ -18,13 +18,26 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void UpdateActionWidget() override;
 
+	UFUNCTION(BlueprintCallable, Category = "Setters")
+	void SetSize(float InSize);
+
+	UFUNCTION(BlueprintCallable, Category = "Setters")
+	void SetUseCustomIconState(bool bNewState);
+
+	UFUNCTION(BlueprintCallable, Category = "Setters")
+	void SetKeyNum(int InKeyNum);
+
 	virtual FSlateBrush GetIcon() const override;
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnUpdatedActionWidget);
+	UPROPERTY(BlueprintAssignable, Category = AdvancedCommonActionWidget)
+	FOnUpdatedActionWidget OnUpdatedActionWidget;
 
 protected:
 	FSlateBrush GetIconForEnhancedInputAction(const UCommonInputSubsystem* CommonInputSubsystem, const UInputAction* InputAction, const int KeyNumber) const;
 	FKey GetKeyForInputType(const ULocalPlayer* LocalPlayer, ECommonInputType InputType, const UInputAction* InputAction, const int KeyNumber) const;
 
-	UFUNCTION(BlueprintNativeEvent)
+	UFUNCTION(BlueprintNativeEvent, Category = "CustomIcon")
 	FSlateBrush GetCustomIcon() const;
 
 	UFUNCTION(BlueprintCallable)

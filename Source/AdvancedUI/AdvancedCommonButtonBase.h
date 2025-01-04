@@ -8,6 +8,7 @@
 
 class UAdvancedCommonButtonInternalBase;
 class UGridPanel;
+class UCommonTextBlock;
 
 /**
  * 
@@ -44,4 +45,16 @@ protected:
 	// You can use it to add content that will not be recognized as button (example: input action widget outside of button borders)
 	UPROPERTY(BlueprintReadOnly, Category = Input, meta = (BindWidget, OptionalWidget = true, AllowPrivateAccess = true))
 	UGridPanel* ParentGridPanel;
+
+	/**
+	 * In case you need second input action widget
+	 */
+	UPROPERTY(BlueprintReadOnly, Category = Input, meta = (BindWidget, OptionalWidget = true, AllowPrivateAccess = true))
+	TObjectPtr<UCommonActionWidget> InputActionWidgetSecond;
+
+	/**
+	 * In case you want update text style in base button
+	 */
+	UPROPERTY(BlueprintReadOnly, Category = Input, meta = (BindWidget, OptionalWidget = true, AllowPrivateAccess = true))
+	UCommonTextBlock* TextWidget;
 };

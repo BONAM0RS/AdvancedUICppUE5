@@ -72,6 +72,26 @@ void UAdvancedCommonActionWidget::UpdateActionWidget()
 	{
 		MyIcon->SetDesiredSizeOverride(FVector2D(Size, Size));
 	}
+
+	OnUpdatedActionWidget.Broadcast();
+}
+
+void UAdvancedCommonActionWidget::SetSize(float InSize)
+{
+	Size = InSize;
+	UpdateActionWidget();
+}
+
+void UAdvancedCommonActionWidget::SetUseCustomIconState(bool bNewState)
+{
+	bUseCustomIcon = bNewState;
+	UpdateActionWidget();
+}
+
+void UAdvancedCommonActionWidget::SetKeyNum(int InKeyNum)
+{
+	KeyNum = InKeyNum;
+	UpdateActionWidget();
 }
 
 FSlateBrush UAdvancedCommonActionWidget::GetIconForEnhancedInputAction(const UCommonInputSubsystem* CommonInputSubsystem,
