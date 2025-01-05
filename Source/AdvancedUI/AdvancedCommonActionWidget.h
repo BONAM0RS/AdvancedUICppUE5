@@ -18,6 +18,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void UpdateActionWidget() override;
 
+	UFUNCTION(BlueprintCallable)
+	void SetAlwaysHiddenState(bool bAlwaysHidden);
+
 	UFUNCTION(BlueprintCallable, Category = "Setters")
 	void SetSize(float InSize);
 

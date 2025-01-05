@@ -76,6 +76,11 @@ void UAdvancedCommonActionWidget::UpdateActionWidget()
 	OnUpdatedActionWidget.Broadcast();
 }
 
+void UAdvancedCommonActionWidget::SetAlwaysHiddenState(bool bAlwaysHidden)
+{
+	SetHidden(bAlwaysHidden);
+}
+
 void UAdvancedCommonActionWidget::SetSize(float InSize)
 {
 	Size = InSize;

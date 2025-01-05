@@ -42,13 +42,9 @@ protected:
 	FCommonButtonBaseClicked OnButtonBaseUnfocused;
 
 protected:
-	// You can use it to add content that will not be recognized as button (example: input action widget outside of button borders)
-	UPROPERTY(BlueprintReadOnly, Category = Input, meta = (BindWidget, OptionalWidget = true, AllowPrivateAccess = true))
-	UGridPanel* ParentGridPanel;
-
 	/**
-	 * In case you need second input action widget
-	 */
+	* In case you need second input action widget
+	*/
 	UPROPERTY(BlueprintReadOnly, Category = Input, meta = (BindWidget, OptionalWidget = true, AllowPrivateAccess = true))
 	TObjectPtr<UCommonActionWidget> InputActionWidgetSecond;
 
@@ -57,4 +53,29 @@ protected:
 	 */
 	UPROPERTY(BlueprintReadOnly, Category = Input, meta = (BindWidget, OptionalWidget = true, AllowPrivateAccess = true))
 	UCommonTextBlock* TextWidget;
+
+	// You can use it to add content that will not be recognized as button (example: input action widget outside of button borders)
+	UPROPERTY(BlueprintReadOnly, Category = Input, meta = (BindWidget, OptionalWidget = true, AllowPrivateAccess = true))
+	UGridPanel* OutsideGridPanel;
+
+	/**
+	 * Should be minimum 2 and even number, button will be placed in the center column and row of this grid. 
+	 * You must place button content to the same center column and grid. Also it is better to set layer 1 for your button content
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Config | OutsideGridPanel", meta = (AllowPrivateAccess = true))
+	int LastColumn = 2;
+
+	/**
+	 * Should be minimum 2 and even number, button will be placed in the center column and row of this grid
+	 * You must place button content to the same center column and grid. Also it is better to set layer 1 for your button content
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Config | OutsideGridPanel", meta = (AllowPrivateAccess = true))
+	int LastRow = 2;
+
+public:
+	UPROPERTY(BlueprintReadOnly, Category = "OutsideGridPanel")
+	int CenterColumn = 1;
+
+	UPROPERTY(BlueprintReadOnly, Category = "OutsideGridPanel")
+	int CenterRow = 1;
 };

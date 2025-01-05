@@ -17,16 +17,17 @@ bool UAdvancedCommonButtonBase::Initialize()
 
 	if (bInitializedThisCall)
 	{
-		if (ParentGridPanel)
+		if (OutsideGridPanel)
 		{
 			UOverlay* NewRootWidget = NewObject<UOverlay>(this);
-			UOverlaySlot* OverlaySlot = Cast<UOverlaySlot>(NewRootWidget->AddChild(ParentGridPanel));
+			UOverlaySlot* OverlaySlot = Cast<UOverlaySlot>(NewRootWidget->AddChild(OutsideGridPanel));
 			OverlaySlot->SetPadding(FMargin());
 			OverlaySlot->SetHorizontalAlignment(EHorizontalAlignment::HAlign_Fill);
 			OverlaySlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Fill);
 
-
-			UGridSlot* GridSlot = ParentGridPanel->AddChildToGrid(WidgetTree->RootWidget, 1, 1);
+			CenterRow = LastRow / 2;
+			CenterColumn = LastColumn / 2;
+			UGridSlot* GridSlot = OutsideGridPanel->AddChildToGrid(WidgetTree->RootWidget, CenterRow, CenterColumn);
 			GridSlot->SetPadding(FMargin());
 			GridSlot->SetHorizontalAlignment(EHorizontalAlignment::HAlign_Fill);
 			GridSlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Fill);
