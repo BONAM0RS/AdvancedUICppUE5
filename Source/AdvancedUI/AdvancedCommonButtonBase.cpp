@@ -25,6 +25,8 @@ bool UAdvancedCommonButtonBase::Initialize()
 			OverlaySlot->SetHorizontalAlignment(EHorizontalAlignment::HAlign_Fill);
 			OverlaySlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Fill);
 
+			//UCommonButtonInternalBase* RootButtonRaw = Cast<UCommonButtonInternalBase>(WidgetTree->RootWidget);
+
 			CenterRow = LastRow / 2;
 			CenterColumn = LastColumn / 2;
 			UGridSlot* GridSlot = OutsideGridPanel->AddChildToGrid(WidgetTree->RootWidget, CenterRow, CenterColumn);

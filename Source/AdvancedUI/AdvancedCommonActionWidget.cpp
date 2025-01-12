@@ -71,6 +71,7 @@ void UAdvancedCommonActionWidget::UpdateActionWidget()
 	if (MyIcon.IsValid())
 	{
 		MyIcon->SetDesiredSizeOverride(FVector2D(Size, Size));
+		MyIcon->SetVisibility(EVisibility::SelfHitTestInvisible);
 	}
 
 	OnUpdatedActionWidget.Broadcast();
